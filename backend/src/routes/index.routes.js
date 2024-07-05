@@ -2,14 +2,17 @@
 // Importa el modulo 'express' para crear las rutas
 import { Router } from "express";
 
-/** Enrutador de usuarios  */
+/ Enrutador de usuarios  */
 import userRoutes from "./user.routes.js";
 
-/** Enrutador de autenticación */
+/ Enrutador de autenticación /
 import authRoutes from "./auth.routes.js";
 
-/** Enrutador de mascota */
+/** Enrutador de mascota/
 import MascotaRoutes from "./mascota.routes.js";
+
+/** Enrutador de comentarios */
+import commentroutes from "./comment.routes.js";
 
 // Se realiza una instancia de express
 const router = Router();
@@ -22,10 +25,8 @@ router.use("/auth", authRoutes);
 //Defino las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
 
+//Defino las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
 
+
 export default router;
-
-import commentroutes from "./comment.routes.js";
-
-
