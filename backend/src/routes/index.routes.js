@@ -31,6 +31,3 @@ router.use("/comment", commentroutes);
 // Exporta el modulo de rutas
 
 export default router;
-
-
-
