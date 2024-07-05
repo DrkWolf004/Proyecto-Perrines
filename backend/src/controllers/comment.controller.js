@@ -2,14 +2,17 @@
 
 //  Importacion 
 
-import Comment from "../models/comment.model.js";
+import Comentario from "../models/comment.model.js";
 
 
 //  Funciones
 
 export async function create(req,res){
     try {
-        const comment = new Comment(req.body);
+        const comment = new Comment({
+
+        
+        });
         await comment.save();
         res.status(201).json({
             message: "Comentario creado",

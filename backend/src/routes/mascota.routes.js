@@ -3,7 +3,7 @@
 import { Router } from "express";
 
 /** Controlador de mascotas */
-import { createMascota } from "../controllers/mascota.controller";
+import { createMascota } from "../controllers/mascota.controller.js";
 
 /** Middlewares de autorizacion */
 import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
@@ -13,5 +13,6 @@ const router = Router();
 
 //Defino las rutas de mascota
 router.post('/', createMascota);
+
 
 export default router;
