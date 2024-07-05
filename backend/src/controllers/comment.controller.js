@@ -9,7 +9,6 @@ import Comentario from "../models/comment.model.js";
 
 export async function create(req,res){
     try {
-<<<<<<< HEAD
         const Commentdata = req.body;
         const ExisteID = await Comment.findOne({ eid: Commentdata.id });
 
@@ -21,11 +20,6 @@ export async function create(req,res){
             titulo: Commentdata.tittle,
             contenido: Commentdata.description,
             fecha: Commentdata.date,
-=======
-        const comment = new Comment({
-
-        
->>>>>>> main
         });
         await comment.save();
         res.status(201).json({
