@@ -17,3 +17,7 @@ router.use("/user",  userRoutes);
 router.use("/auth", authRoutes);
 
 export default router;
+
+import commentroutes from "./comment.routes.js";
+
+router.use("/comment", commentroutes);
