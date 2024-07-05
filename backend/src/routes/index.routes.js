@@ -9,7 +9,7 @@ import userRoutes from "./user.routes.js";
 import authRoutes from "./auth.routes.js";
 
 /** Enrutador de mascota */
-import mascotaRoutes from "./mascota.routes.js";
+import MascotaRoutes from "./mascota.routes.js";
 
 // Se realiza una instancia de express
 const router = Router();
@@ -20,6 +20,6 @@ router.use("/user",  userRoutes);
 router.use("/auth", authRoutes);
 
 //Defino las rutas de mascotas /api/mascota
-router.use("/mascota", mascotaRoutes);
+router.use("/mascota", MascotaRoutes);
 
 export default router;
