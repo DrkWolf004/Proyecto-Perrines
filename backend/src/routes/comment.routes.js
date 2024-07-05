@@ -15,3 +15,4 @@ router.delete("/delete", deleteComment);
 router.get("/getAll", getAll);
 router.get("/getOne", getOne);
 
+export default router;

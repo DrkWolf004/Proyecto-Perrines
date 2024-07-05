@@ -22,8 +22,10 @@ router.use("/auth", authRoutes);
 //Defino las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
 
+router.use("/comment", commentroutes);
+
 export default router;
 
 import commentroutes from "./comment.routes.js";
 
-router.use("/comment", commentroutes);
+
