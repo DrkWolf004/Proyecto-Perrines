@@ -8,6 +8,9 @@ import userRoutes from "./user.routes.js";
 /** Enrutador de autenticación */
 import authRoutes from "./auth.routes.js";
 
+/** Enrutador de mascota */
+import MascotaRoutes from "./mascota.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -15,5 +18,8 @@ const router = Router();
 router.use("/user",  userRoutes);
 // Define las rutas para la autenticación /api/auth
 router.use("/auth", authRoutes);
+
+//Defino las rutas de mascotas /api/mascota
+router.use("/mascota", MascotaRoutes);
 
 export default router;
