@@ -11,6 +11,9 @@ import authRoutes from "./auth.routes.js";
 /** Enrutador de mascota */
 import MascotaRoutes from "./mascota.routes.js";
 
+/** Enrutador de comentarios */
+import commentroutes from "./comment.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -22,8 +25,11 @@ router.use("/auth", authRoutes);
 //Defino las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
 
+//Defino las rutas de comentarios /api/comment
+router.use("/comment", commentroutes);
+
+
 export default router;
 
-import commentroutes from "./comment.routes.js";
 
-router.use("/comment", commentroutes);
+
