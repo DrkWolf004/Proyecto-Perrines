@@ -31,8 +31,8 @@ export async function createMascota(req, res) {
             data: newMascota
         });
     }catch (error) {
-    console.log("Error en mascota.controller.js -> createMascota():", error);
-    res.status(500).json({ message: "Error interno del servidor." });
-}
-
+        console.log("Error en mascota.controller.js -> createMascota():", error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
 };
+
