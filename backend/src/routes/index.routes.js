@@ -28,6 +28,7 @@ router.use("/mascota", MascotaRoutes);
 //Defino las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
 
+// Exporta el modulo de rutas
 
 export default router;
 
