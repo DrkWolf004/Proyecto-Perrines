@@ -9,7 +9,18 @@ import Comment from "../models/comment.model.js";
 
 export async function create(req,res){
     try {
-        const comment = new Comment(req.body);
+        const Commentdata = req.body;
+        const ExisteID = await Comment.findOne({ eid: Commentdata.id });
+
+        if (ExisteID) {
+            return res.status(400).json({ message: "El ID ya esta registrado." });
+        }
+        const comment = new Comment({
+            id: Commentdata.id,
+            titulo: Commentdata.tittle,
+            contenido: Commentdata.description,
+            fecha: Commentdata.date,
+        });
         await comment.save();
         res.status(201).json({
             message: "Comentario creado",
