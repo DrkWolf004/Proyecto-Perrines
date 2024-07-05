@@ -50,4 +50,31 @@ export async function deleteComment(req,res){
     }
 }
 
+export async function getAll(req,res){
+    try {
+        const comments = await Comment.find();
+        res.status(200).json({
+            message: "Lista de comentarios",
+            data: comments
+        });
+    }catch(error){
+        console.log("Error en comment.controller.js -> getAll(): ", error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function getOne(req,res){
+    try {
+        const id = req.query.id;
+        const comment = await Comment.findById(id);
+        res.status(200).json({
+            message: "Comentario encontrado",
+            data: comment
+        });
+    }catch(error){
+        console.log("Error en comment.controller.js -> getOne(): ", error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
