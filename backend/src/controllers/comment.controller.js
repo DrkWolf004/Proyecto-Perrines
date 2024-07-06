@@ -32,21 +32,7 @@ export async function create(req,res){
     }
 
 }
-/*export async function edit(req,res){
-    try {
-        const id = req.query.id;
-        const updatedData = req.body;
-        const comment = await Comment.findByIdAndUpdate(id, updatedData, {new: true});
-        res.status(200).json({
-            message: "Comentario actualizado",
-            data: comment
-        });
-    }catch(error){
-        console.log("Error en comment.controller.js -> edit(): ", error);
-        res.status(500).json({ message: error.message });
-    }
-}
-*/
+
 export async function deleteComment(req,res){
     try {
         const id = req.query.id;
