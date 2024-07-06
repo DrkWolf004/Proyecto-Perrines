@@ -103,27 +103,22 @@ export async function getOne(req,res){
     }
 }
 
-async function edit(commentId, newText) {
-    const url = `http://localhost:3000/comment/${commentId}`;  // URL de la API real
-    const data = { text: newText };  // Nuevo texto del comentario
-  
+export async function edit(req,res){
     try {
-      const response = await fetch(url, {
-        method: 'PUT',  // Método HTTP para actualizar recursos
-        headers: {
-          'Content-Type': 'application/json'  // Tipo de contenido
-        },
-        body: JSON.stringify(data)  // Convertir el objeto data a una cadena JSON
-      });
-  
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-  
-      return await response.json();  // Devolver el comentario actualizado
-    } catch (error) {
-      console.error('Error al editar el comentario:', error);
-      return null;
+        const id = req.query.id;
+        const updatedData = req.body;
+        const comment = await Comment.findOneAndUpdate
+        ({
+            id: id
+        }, updatedData, {new: true});
+        res.status(200).json({
+            message: "Comentario actualizado",
+            data: comment
+        });
     }
-  }
-  
+    catch(error){
+        console.log("Error en comment.controller.js -> edit(): ", error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
