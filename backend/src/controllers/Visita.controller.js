@@ -22,16 +22,17 @@ export async function obtenerVisitas(req, res){
 
 // Funcion para crear una nueva visita
 export async function crearVisita(req, res){
+  try{
+    const VisitaData = req.body;
 
-  const { mascotaId, fecha, motivo } = req.body;
+    const nuevaVisita = new Visita({
 
-  const nuevaVisita = new Visita({
-    mascotaId,
-    fecha,
-    motivo,
-  });
+      mascotaId: VisitaData.id,
+      fecha: VisitaData.fecha,
+      motivo: VisitaData.motivo,
+    });
 
-  try {
+  
 
     const visitaGuardada = await nuevaVisita.save();
     res.status(201).json(visitaGuardada);
@@ -43,7 +44,7 @@ export async function crearVisita(req, res){
   }
 };
 
-
+}
 // Funcion para actualizar una visita existente
 export async function actualizarVisita(req, res){
 
