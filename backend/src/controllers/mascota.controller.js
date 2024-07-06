@@ -10,7 +10,7 @@ export async function createMascota(req, res) {
         const ExisteID = await Mascota.findOne({ eid: MascotaData.id });
 
         if (ExisteID) {
-            return res.status(400).json({ message: "El ID ya estÃ¡ registrado." });
+            return res.status(400).json({ message: "El ID ya esta registrado." });
         }
 
         const newMascota = new Mascota ({
@@ -31,6 +31,7 @@ export async function createMascota(req, res) {
             data: newMascota
         });
     }catch (error) {
+
     console.log("Error en mascota.controller.js -> createMascota():", error);
     res.status(500).json({ message: "Error interno del servidor." });
 }
