@@ -36,10 +36,9 @@ const mascotaSchema = new mongoose.Schema(
             type: Date,
             required: false
         },
-        HistorialComidas:{
-            type: mongoose.Types.ObjectId,
-            Ref: 'HistorialComida',
-            required: true
+        ultima_comida:{
+            type: Date,
+            required: false
         }
     }
 );
