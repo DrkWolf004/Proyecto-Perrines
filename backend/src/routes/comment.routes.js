@@ -13,6 +13,6 @@ router.post('/', create);
 router.put('/', edit);
 router.delete('/', deleteComment);
 router.get('/', getAll);
-router.get('/', getOne);
+router.get('/1', getOne);
 
 export default router;
