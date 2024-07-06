@@ -2,7 +2,7 @@
 
 //  Importacion 
 
-import Comentario from "../models/comment.model.js";
+import Comment from "../models/comment.model.js";
 
 
 //  Funciones
@@ -21,6 +21,7 @@ export async function create(req,res){
             descripcion: Commentdata.descripcion,
             date: Commentdata.date,
         });
+
         await comment.save();
         res.status(201).json({
             message: "Comentario creado",
