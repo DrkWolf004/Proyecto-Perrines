@@ -38,7 +38,8 @@ export async function createMascota(req, res) {
 
 export async function DeleteMascota(req, res){
     try{
-        const idMascota = req.query.rut;
+        const idMascota = req.query.id;
+
         if (!idMascota) {
             res.status(400).json({
                 message: "El parámetro 'id' es requerido.",
