@@ -33,20 +33,36 @@ export async function create(req,res){
 
 }
 
-export async function deleteComment(req,res){
-    try {
-        const id = req.query.id;
-        await Comment.findByIdAndDelete(id);
+export async function deleteComment(req, res){
+    try{
+        const idcomment = req.query.id;
+
+        if (!idcomment) {
+            res.status(400).json({
+                message: "El parámetro 'id' es requerido.",
+                data: null
+            });
+            return;
+        }
+
+        const comment = await Comment.findOneAndDelete({ id: idcomment });
+
+        if (!comment) {
+            return res.status(404).json({
+                message: "comentario no encontrado",
+                data: null
+            });
+        }
+
         res.status(200).json({
-            message: "Comentario eliminado",
-            data: null
+            message: "Comentario eliminado exitosamente!",
+            data: comment
         });
     }catch(error){
-        console.log("Error en comment.controller.js -> deleteComment(): ", error);
-        res.status(500).json({ message: error.message });
+        console.log("Error en comment.controller.js -> deleteComment():", error);
+        res.status(500).json({ message: "Error interno del servidor." });
     }
 }
-
 export async function getAll(req,res){
     try {
         const comments = await Comment.find();
