@@ -103,7 +103,7 @@ export async function getOne(req,res){
     }
 }
 
-async function editComment(commentId, newText) {
+async function edit(commentId, newText) {
     const url = `http://localhost:3000/comment/${commentId}`;  // URL de la API real
     const data = { text: newText };  // Nuevo texto del comentario
   
