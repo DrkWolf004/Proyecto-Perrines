@@ -32,7 +32,7 @@ export async function create(req,res){
     }
 
 }
-export async function edit(req,res){
+/*export async function edit(req,res){
     try {
         const id = req.query.id;
         const updatedData = req.body;
@@ -46,7 +46,7 @@ export async function edit(req,res){
         res.status(500).json({ message: error.message });
     }
 }
-
+*/
 export async function deleteComment(req,res){
     try {
         const id = req.query.id;
@@ -102,3 +102,34 @@ export async function getOne(req,res){
         res.status(500).json({ message: error.message });
     }
 }
+
+async function edit(commentId, newText) {
+    const url = `http://localhost:3000/api/comments/${commentId}`;
+    
+    // Datos que se enviarán en el cuerpo de la solicitud
+    const data = {
+      text: newText
+    };
+    
+    try {
+      const response = await fetch(url, {
+        method: 'PUT', // Método HTTP para actualizar recursos
+        headers: {
+          'Content-Type': 'application/json' // Tipo de contenido
+        },
+        body: JSON.stringify(data) // Convertir el objeto data a una cadena JSON
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+      
+      const updatedComment = await response.json();
+      return updatedComment;
+      
+    } catch (error) {
+      console.error('Error al editar el comentario:', error);
+      return null;
+    }
+  }
+  
