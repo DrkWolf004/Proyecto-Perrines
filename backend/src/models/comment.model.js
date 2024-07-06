@@ -2,7 +2,8 @@
 
 import mongoose from "mongoose";
 
-const CommentSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
+
     id: {
         type: Number,
         required: true,
@@ -26,4 +27,6 @@ const CommentSchema = new mongoose.Schema({
 
 });
 
-export default mongoose.model('Comment', CommentSchema);
+
+export default mongoose.model('Comment', commentSchema);
+

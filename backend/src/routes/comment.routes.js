@@ -15,4 +15,5 @@ router.delete('/', deleteComment);
 router.get('/', getAll);
 router.get('/1', getOne);
 
+
 export default router;

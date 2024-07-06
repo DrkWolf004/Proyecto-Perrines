@@ -17,11 +17,13 @@ export async function create(req,res){
         }
         const newcomment = new Comment({
             id: Commentdata.id,
-            titulo: Commentdata.tittle,
+
+            tittle: Commentdata.tittle,
             descripcion: Commentdata.descripcion,
             date: Commentdata.date,
         });
-        await newcomment.save();
+
+        await comment.save();
         res.status(201).json({
             message: "Comentario creado",
             data: newcomment
