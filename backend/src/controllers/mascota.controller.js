@@ -10,7 +10,7 @@ export async function createMascota(req, res) {
         const ExisteID = await Mascota.findOne({ eid: MascotaData.id });
 
         if (ExisteID) {
-            return res.status(400).json({ message: "El ID ya estÃ¡ registrado." });
+            return res.status(400).json({ message: "El ID ya esta registrado." });
         }
 
         const newMascota = new Mascota ({
@@ -30,6 +30,7 @@ export async function createMascota(req, res) {
             data: newMascota
         });
     }catch (error) {
+
     console.log("Error en mascota.controller.js -> createMascota():", error);
     res.status(500).json({ message: "Error interno del servidor." });
 }
@@ -39,7 +40,6 @@ export async function createMascota(req, res) {
 export async function DeleteMascota(req, res){
     try{
         const idMascota = req.query.id;
-
         if (!idMascota) {
             res.status(400).json({
                 message: "El parámetro 'id' es requerido.",
@@ -81,6 +81,7 @@ export async function GetMascota(req, res){
 
         const mascota = await Mascota.findOne({id:idMascotas});
 
+
         if(!mascota){
             res.status(404).json({
                 message: "Mascota no encontrada",
@@ -102,7 +103,7 @@ export async function GetMascota(req, res){
 
 export async function GetMascotas(req, res){
     try{
-        const mascotas = await Mascotas.find().populate('id', 'nombre');
+        const mascotas = await Mascota.find();
         res.status(200).json({
             message: "Lista de Mascotas",
             data: mascotas
