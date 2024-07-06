@@ -21,7 +21,6 @@ export async function createMascota(req, res) {
             color:MascotaData.color,
             salud:MascotaData.salud,
             ultima_visita:MascotaData.ultima_visita,
-            ultima_comida:MascotaData.ultima_comida
         });
 
         await newMascota.save();
