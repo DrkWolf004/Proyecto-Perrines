@@ -9,11 +9,15 @@ export async function obtenerVisitas(req, res){
   try {
 
     const visitas = await Visita.find({ mascotaId: req.params.mascotaId });
-    res.json(visitas);
+    res.status(200).json({
+      message:"Lista de visitas medicas",
+      data: visitas,
+    })
+    
 
   } catch (error) {
-
-    res.status(500).json({ message: error.message });
+    console.log("Error en visita.controller.js -> obtenerVisita(): ", error);
+    res.status(500).json({ message: "Error interno del servidor" });
 
   }
 
@@ -33,18 +37,20 @@ export async function crearVisita(req, res){
     });
 
   
-
     const visitaGuardada = await nuevaVisita.save();
-    res.status(201).json(visitaGuardada);
+    res.status(201).json({
+      message: "La visita se ha guardado correctamente",
+      data: visitaGuardada,
+    });
 
   } catch (error) {
-
-    res.status(400).json({ message: error.message });
+    console.log("Error en visita.controller.js -> crearVisita():", error);
+    res.status(500).json({ message: "Error interno del servidor" });
 
   }
 };
 
-}
+
 // Funcion para actualizar una visita existente
 export async function actualizarVisita(req, res){
 
@@ -66,7 +72,7 @@ export async function actualizarVisita(req, res){
     res.json(visitaActualizada);
 
   } catch (error) {
-
+    console.log("Error visita.controller.js ->actualizarVisita:",error);
     res.status(400).json({ message: error.message });
 
   }
