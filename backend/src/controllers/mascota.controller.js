@@ -79,7 +79,7 @@ export async function GetMascota(req, res){
             return;
         }
 
-        const mascota = await Mascota.findOne({id: idMascotas});
+        const mascota = await Mascota.findOne({id:idMascotas});
 
         if(!mascota){
             res.status(404).json({
@@ -88,6 +88,12 @@ export async function GetMascota(req, res){
             })
             return;
         }
+
+        res.status(200).json({
+            message: "Mascota encontrada",
+            data: mascota
+        });
+        
     }catch(error){
         console.log("Error en mascota.controller.js -> GetMascota():", error);
         res.status(500).json({ message: "Error interno del servidor." });
