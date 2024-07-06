@@ -10,24 +10,27 @@ import Comment from "../models/comment.model.js";
 export async function create(req,res){
     try {
         const Commentdata = req.body;
+        
         const ExisteID = await Comment.findOne({ eid: Commentdata.id });
 
         if (ExisteID) {
             return res.status(400).json({ message: "El ID ya esta registrado." });
         }
+
         const newcomment = new Comment({
             id: Commentdata.id,
-
             tittle: Commentdata.tittle,
             descripcion: Commentdata.descripcion,
             date: Commentdata.date,
         });
 
-        await comment.save();
+        await newcomment.save();
+
         res.status(201).json({
             message: "Comentario creado",
             data: newcomment
         });
+
     }catch(error){
         console.log("Error en comment.controller.js -> create(): ", error);
         res.status(500).json({ message: error.message });
