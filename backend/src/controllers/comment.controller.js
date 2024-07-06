@@ -103,6 +103,10 @@ export async function getOne(req,res){
         console.log("Error en comment.controller.js -> getOne(): ", error);
         res.status(500).json({ message: error.message });
     }
+        res.status(200).json({
+            message: "Comentario encontrado",
+            data: comment
+        });
 }
 
 export async function edit(req,res){
