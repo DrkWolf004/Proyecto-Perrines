@@ -17,9 +17,9 @@ export async function create(req,res){
         }
         const comment = new Comment({
             id: Commentdata.id,
-            titulo: Commentdata.tittle,
-            contenido: Commentdata.description,
-            fecha: Commentdata.date,
+            tittle: Commentdata.tittle,
+            descripcion: Commentdata.descripcion,
+            date: Commentdata.date,
         });
         await comment.save();
         res.status(201).json({
