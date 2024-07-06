@@ -97,7 +97,7 @@ export async function GetMascota(req, res){
 
 export async function GetMascotas(req, res){
     try{
-        const mascotas = await Mascotas.find().populate('id', 'nombre');
+        const mascotas = await Mascota.find();
         res.status(200).json({
             message: "Lista de Mascotas",
             data: mascotas
