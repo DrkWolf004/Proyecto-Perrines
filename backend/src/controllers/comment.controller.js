@@ -15,16 +15,16 @@ export async function create(req,res){
         if (ExisteID) {
             return res.status(400).json({ message: "El ID ya esta registrado." });
         }
-        const comment = new Comment({
+        const newcomment = new Comment({
             id: Commentdata.id,
             titulo: Commentdata.tittle,
-            contenido: Commentdata.description,
-            fecha: Commentdata.date,
+            descripcion: Commentdata.descripcion,
+            date: Commentdata.date,
         });
-        await comment.save();
+        await newcomment.save();
         res.status(201).json({
             message: "Comentario creado",
-            data: comment
+            data: newcomment
         });
     }catch(error){
         console.log("Error en comment.controller.js -> create(): ", error);

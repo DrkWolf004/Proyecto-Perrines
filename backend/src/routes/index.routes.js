@@ -2,13 +2,13 @@
 // Importa el modulo 'express' para crear las rutas
 import { Router } from "express";
 
-/ Enrutador de usuarios  */
+/** Enrutador de usuarios  */
 import userRoutes from "./user.routes.js";
 
-/ Enrutador de autenticación /
+/** Enrutador de autenticación */
 import authRoutes from "./auth.routes.js";
 
-/** Enrutador de mascota/
+/** Enrutador de mascota */
 import MascotaRoutes from "./mascota.routes.js";
 
 /** Enrutador de comentarios */
