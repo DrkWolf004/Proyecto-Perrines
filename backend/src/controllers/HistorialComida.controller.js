@@ -8,8 +8,10 @@ export async function createHistorial(req, res) {
         const HistorialData = req.body;
 
         const newHistorial = new HistorialComida ({
+
             id: HistorialData.id,
-            fecha: HistorialData.fecha
+            Fecha: HistorialData.Fecha
+
         });
 
         await newHistorial.save();
@@ -74,7 +76,8 @@ export async function getHistorial(req,res){
 export async function getHistoriales(req,res){
     try {
 
-        const Historial = await HistorialComida.find().populate('Mascota');;
+        const Historial = await HistorialComida.find();
+
         res.status(200).json({
           message:"Lista de alimentacion",
           data: Historial

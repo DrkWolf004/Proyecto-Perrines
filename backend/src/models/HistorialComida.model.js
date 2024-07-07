@@ -12,10 +12,9 @@ const comidaSchema = new mongoose.Schema({
         Ref: 'Mascota',
         required: true
     },
-
     Fecha:{
-        type: date,
-        require: true
+        type: Date,
+        required: true
     }
 
 });
