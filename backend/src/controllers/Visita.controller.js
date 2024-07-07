@@ -1,7 +1,7 @@
 //Importaciones
 
 import Visita from '../models/Visita.model.js';
-
+//.
 
 // Funcion para obtener todas las visitas de una mascota
 export async function obtenerVisitas(req, res){
