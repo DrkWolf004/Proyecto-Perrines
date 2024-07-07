@@ -14,6 +14,9 @@ import MascotaRoutes from "./mascota.routes.js";
 /** Enrutador de comentarios */
 import commentroutes from "./comment.routes.js";
 
+/** Enrutador de gestión de emergencia */
+import gestEmergencyRoutes from "./GestEmergency.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -28,6 +31,8 @@ router.use("/mascota", MascotaRoutes);
 //Defino las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
 
+// Define las rutas de gestión de emergencia /api/gest-emergency
+router.use("/gest-emergency", gestEmergencyRoutes);
 
 export default router;
 
