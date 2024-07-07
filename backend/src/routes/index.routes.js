@@ -11,6 +11,9 @@ import authRoutes from "./auth.routes.js";
 /** Enrutador de mascota */
 import MascotaRoutes from "./mascota.routes.js";
 
+/** Enrutador de HistorialComida */
+import HistorialRoutes from "./HistorialComida.routes.js"
+
 /** Enrutador de comentarios */
 import commentroutes from "./comment.routes.js";
 
@@ -27,6 +30,9 @@ router.use("/auth", authRoutes);
 
 //Defino las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
+
+//Defino las rutas de HistorialComidas /api/comida
+router.use("/comida", HistorialRoutes);
 
 //Defino las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
