@@ -3,6 +3,7 @@
 import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
+
     id: {
         type: Number,
         required: true,
@@ -26,4 +27,6 @@ const commentSchema = new mongoose.Schema({
 
 });
 
+
 export default mongoose.model('Comment', commentSchema);
+

@@ -14,6 +14,9 @@ import MascotaRoutes from "./mascota.routes.js";
 /** Enrutador de comentarios */
 import commentroutes from "./comment.routes.js";
 
+/** Enrutador de Visitas */
+import VisitasRoutes from "./Visita.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -27,6 +30,9 @@ router.use("/mascota", MascotaRoutes);
 
 //Defino las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
+
+//Defino las rutas de visitas /api/visita
+router.use("/visita", VisitasRoutes);
 
 // Exporta el modulo de rutas
 
