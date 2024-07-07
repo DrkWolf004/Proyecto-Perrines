@@ -1,10 +1,14 @@
 "use strict";
 
 //importar el modulo express
-import { express } from "express";
-import { obtenerVisitas,crearVisita,actualizarVisita } from "../controllers/Visita.controller"; 
+import { Router } from "express";
 
-const router = express.Router();
+import { obtenerVisitas,crearVisita, actualizarVisita } from "../controllers/Visita.controller.js"; 
+
+/** Middlewares de autorizacion */
+import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
+
+const router = Router();
 
 // Obtener todas las visitas de una mascota
 router.get('/', obtenerVisitas);
@@ -13,6 +17,6 @@ router.get('/', obtenerVisitas);
 router.post('/', crearVisita);
 
 // Actualizar una visita existente (solo administradores)
-router.put('/', actualizarVisita);
+router.put('/:id', actualizarVisita);
 
 export default router;

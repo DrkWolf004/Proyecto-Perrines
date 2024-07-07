@@ -1,13 +1,14 @@
 "use strict";
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const visitaSchema = new mongoose.Schema({
   
     mascotaId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Mascota',
-      required: true
+      required: true,
+      unique: false
     },
   
     fecha: {

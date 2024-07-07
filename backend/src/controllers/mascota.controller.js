@@ -10,7 +10,7 @@ export async function createMascota(req,res){
         const ExisteID = await Mascota.findOne({eid: MascotaData.id});
 
         if (ExisteID){
-            returnres.status(400).json({message: "El ID ya esta resgistrado."});
+            return res.status(400).json({message: "El ID ya esta resgistrado."});
         };
 
         const newMascota = new Mascota ({

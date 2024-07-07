@@ -11,6 +11,9 @@ import authRoutes from "./auth.routes.js";
 /** Enrutador de mascota */
 import MascotaRoutes from "./mascota.routes.js";
 
+/** Enrutador de Visitas */
+import VisitasRoutes from "./Visita.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -21,5 +24,7 @@ router.use("/auth", authRoutes);
 
 //Defino las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
+
+router.use("/visita", VisitasRoutes);
 
 export default router;
