@@ -19,8 +19,7 @@ export async function createMascota(req, res) {
             genero:MascotaData.genero,
             raza:MascotaData.raza,
             color:MascotaData.color,
-            salud:MascotaData.salud,
-            ultima_visita:MascotaData.ultima_visita,
+            salud:MascotaData.salud
         });
 
         await newMascota.save();
