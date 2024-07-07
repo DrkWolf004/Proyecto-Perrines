@@ -3,8 +3,6 @@
 import { Router } from "express";
 
 /** Controlador de mascotas */
-
-
 import { createMascota, DeleteMascota, GetMascota, GetMascotas, UpdateMascota } from "../controllers/mascota.controller.js";
 
 /** Middlewares de autorizacion */
