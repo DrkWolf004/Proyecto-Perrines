@@ -7,12 +7,13 @@ import mongoose from "mongoose";
 
 const comidaSchema = new mongoose.Schema({
 
-    id:{
+    comidaId:{
         type: mongoose.Types.ObjectId,
-        Ref: 'Mascota',
-        required: true
+        ref: 'Mascota',
+        required: true,
+        unique: false
     },
-    Fecha:{
+    fechaComida:{
         type: Date,
         required: true
     }
