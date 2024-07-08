@@ -1,6 +1,6 @@
 // Importaciones de modelos
-import Encargado from '../models/encargado.model.js';
-import Veterinaria from '../models/veterinaria.model.js';
+import Encargado from '../models/Encargado.model.js';
+import Veterinaria from '../models/Veterinaria.model.js';
 
 // Encargado controllers
 
@@ -8,7 +8,7 @@ import Veterinaria from '../models/veterinaria.model.js';
 export async function getEncargados(req, res) {
     try {
         const encargados = await Encargado.find();
-        res.status(200).json(encargados);
+        res.status(200).json({ message:"Lista de encargados", data: encargados});
     } catch (error) {
         res.status(500).json({ message: "Error al obtener los encargados", error });
     }
@@ -16,14 +16,30 @@ export async function getEncargados(req, res) {
 
 // Crear un nuevo encargado
 export async function createEncargado(req, res) {
-    const { nombre, correo, telefono } = req.body;
+
+    const EncargadoData = req.body;
 
     try {
-        const newEncargado = new Encargado({ nombre, correo, telefono });
+        const newEncargado = new Encargado({ 
+
+            nombre:EncargadoData.nombre, 
+            correo:EncargadoData.correo, 
+            telefono:EncargadoData.telefono, 
+            disponibilidad:EncargadoData.disponibilidad
+            
+        });
+        
         await newEncargado.save();
-        res.status(201).json(newEncargado);
+
+        res.status(201).json({ 
+            message: "Encargado registrado exitosamente",
+            data: newEncargado
+        });
     } catch (error) {
-        res.status(500).json({ message: "Error al crear el encargado", error });
+        
+        console.log("Error en GestEmergency.controller.js -> createEncargado():", error),
+        res.status(500).json({ message: "Error interno del servidor." }); 
+        
     }
 }
 
@@ -76,15 +92,28 @@ export async function getVeterinarias(req, res) {
 
 // Crear una nueva veterinaria
 export async function createVeterinaria(req, res) {
-    const { nombre, telefono, direccion, horario } = req.body;
+    const VeterinariaData = req.body;
 
     try {
-        const newVeterinaria = new Veterinaria({ nombre, telefono, direccion, horario });
-        newVeterinaria.disponibilidad = verificarDisponibilidad(horario); // Verificar disponibilidad al crear
+        const newVeterinaria = new Veterinaria({ 
+
+            nombre:VeterinariaData.nombre, 
+            telefono:VeterinariaData.telefono, 
+            direccion:VeterinariaData.direccion, 
+            horarioinicio:VeterinariaData.horarioinicio, 
+            horariofin:VeterinariaData.horariofin 
+        });
+        
         await newVeterinaria.save();
-        res.status(201).json(newVeterinaria);
+
+        res.status(201).json({ 
+            message: "Veterinaria registrada exitosamente",
+            data: newVeterinaria
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error al crear la veterinaria", error });
+        console.log("Error en GestEmergency.controller.js -> createVeterinaria():", error);
+        res.status(500).json({ message: "Error interno del servidor." });
     }
 }
 
