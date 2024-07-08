@@ -4,7 +4,7 @@
 import { Router } from "express";
 
 // Importa el controlador 'anuncios.controller.js'
-import * as anunciosController from "../controllers/anuncios.controller";
+import {crearAnuncio,actualizarAnuncio,eliminarAnuncio,obternerAnuncios,obternerComentarios } from "../controllers/anuncios.controller.js";
 
 // Importa las validaciones
 import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
@@ -13,11 +13,11 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post('/', anunciosController.crearAnuncio);
-router.put('/', anunciosController.actualizarAnuncio);
-router.delete('/', anunciosController.eliminarAnuncio);
-router.get('/', anunciosController.obternerAnuncios);
-router.get('/comentario', anunciosController.obternerComentarios);
+router.post('/', crearAnuncio);
+router.put('/:id', actualizarAnuncio);
+router.delete('/:id', eliminarAnuncio);
+router.get('/', obternerAnuncios);
+router.get('/comentario', obternerComentarios);
 
 
 export default router;
