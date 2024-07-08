@@ -1,7 +1,7 @@
 // Importa el modelo de datos 'User'
 import User from '../models/user.model.js';
 import Role from '../models/role.model.js';
-// .
+
 export async function getUser(req, res) {
     try {
         const rutUser = req.query.rut;
