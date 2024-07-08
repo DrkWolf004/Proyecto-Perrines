@@ -4,7 +4,7 @@
 import { Router } from "express";
 
 // Importa el controlador 'anuncios.controller.js'
-import {crearAnuncio,actualizarAnuncio,eliminarAnuncio,obternerAnuncios,obternerComentarios } from "../controllers/anuncios.controller.js";
+import {crearAnuncio,actualizarAnuncio,eliminarAnuncio,obternerAnuncios,obternerComentarios, crearComentario } from "../controllers/anuncios.controller.js";
 
 // Importa las validaciones
 import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
@@ -17,6 +17,7 @@ router.post('/', crearAnuncio);
 router.put('/:id', actualizarAnuncio);
 router.delete('/:id', eliminarAnuncio);
 router.get('/', obternerAnuncios);
+router.post('/comentario', crearComentario);
 router.get('/comentario', obternerComentarios);
 
 

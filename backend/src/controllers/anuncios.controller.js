@@ -40,7 +40,7 @@ export async function crearComentario(req, res) {
             marca : ComentarioData.marca,
 
         });
-        
+
         await nuevoComentario.save();
 
         res.status(201).json({
@@ -75,7 +75,7 @@ export async function obternerAnuncios(req, res){
 export async function obternerComentarios(req, res){
     try {
 
-        const comentarios = await Completar.find().populate("id");
+        const comentarios = await completar.find().populate("id");
 
         res.status(200).json({
             message: "Lista de comentarios",
