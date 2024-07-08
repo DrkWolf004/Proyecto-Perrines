@@ -24,6 +24,9 @@ import gestEmergencyRoutes from "./GestEmergency.routes.js";
 /** Enrutador de Visitas */
 import VisitasRoutes from "./Visita.routes.js";
 
+/** Enrutador de Anuncios */
+import AnunciosRoutes from "./anuncios.routes.js";
+
 // Se realiza una instancia de express
 const router = Router();
 
@@ -46,6 +49,9 @@ router.use("/gest-emergency", gestEmergencyRoutes);
 
 //Defino las rutas de visitas /api/visita
 router.use("/visita", VisitasRoutes);
+
+//Defino las rutas de visitas /api/visita
+router.use("/anuncios", AnunciosRoutes);
 
 
 // Exporta el modulo de rutas
