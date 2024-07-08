@@ -20,6 +20,6 @@ router.post('/', crearVisita);
 router.put('/:id', actualizarVisita);
 
 router.delete('/:id', deleteVisita);
-router.get('/:id', getHistorial);
+router.get('/:id', getVisita);
 
 export default router;
