@@ -11,8 +11,7 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 // Obtener todas las visitas de una mascota
-router.get('/',isAdmin, obtenerVisitas);
-router.get('/',isUser, obtenerVisitas);
+router.get('/', obtenerVisitas);
 
 // Crear una nueva visita (solo administradores)
 router.post('/',isAdmin ,crearVisita);
@@ -21,7 +20,6 @@ router.post('/',isAdmin ,crearVisita);
 router.put('/:id',isAdmin, actualizarVisita);
 
 router.delete('/:id',isAdmin ,deleteVisita);
-router.get('/:id',isAdmin, getVisita);
-router.get('/:id',isUser, getVisita);
+router.get('/:id', getVisita);
 
 export default router;

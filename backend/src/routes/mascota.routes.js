@@ -14,10 +14,8 @@ const router = Router();
 //Defino las rutas de mascota
 router.post('/',isAdmin ,createMascota);
 router.delete('/',isAdmin ,DeleteMascota);
-router.get('/',isAdmin, GetMascotas);
-router.get('/1',isAdmin, GetMascota);
-router.get('/',isUser, GetMascotas);
-router.get('/1',isUser, GetMascota);
+router.get('/', GetMascotas);
+router.get('/1', GetMascota);
 router.put('/',isAdmin ,UpdateMascota);
 
 

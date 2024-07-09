@@ -113,9 +113,9 @@ export async function GetMascotas(req, res){
         res.status(500).json({ message: "Error interno del servidor." });
     }
 }
-
 export async function UpdateMascota(req, res){
     try{
+
         const idMascota = req.query.id;
         const updatedData = req.body;
 
@@ -126,6 +126,7 @@ export async function UpdateMascota(req, res){
             });
             return;
         }
+
         const MascotaMod = await Mascota.findOneAndUpdate({ id: idMascota }, updatedData, { new: true });
 
         if (!MascotaMod) {
@@ -140,8 +141,12 @@ export async function UpdateMascota(req, res){
             message: "Mascota actualizado correctamente!",
             data: MascotaMod
         });
+
     }catch(error){
         console.log("Error en mascota.controller.js -> UpdateMascota():", error);
         res.status(500).json({ message: "Error interno del servidor." });
     }
 }
+
+
+

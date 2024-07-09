@@ -16,12 +16,9 @@ const router = Router();
 router.post('/',isAdmin ,crearAnuncio);
 router.put('/:id',isAdmin ,actualizarAnuncio);
 router.delete('/:id',isAdmin ,eliminarAnuncio);
-router.get('/',isUser ,obternerAnuncios);
-router.get('/',isAdmin ,obternerAnuncios);
-router.post('/comentario',isUser ,crearComentario);
-router.post('/comentario',isAdmin ,crearComentario);
-router.get('/comentario',isUser ,obternerComentarios);
-router.get('/comentario',isAdmin ,obternerComentarios);
+router.get('/',obternerAnuncios);
+router.post('/comentario',crearComentario);
+router.get('/comentario',obternerComentarios);
 
 
 export default router;

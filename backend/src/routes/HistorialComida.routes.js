@@ -14,18 +14,11 @@ const router = Router();
 //Defino las rutas de Historial comida
 
 //admin
-router.post('/',isAdmin ,createHistorial);
-router.delete('/:id',isAdmin, deleteHistorial);
+router.post('/',createHistorial);
+router.delete('/:id', deleteHistorial);
 router.get('/',isAdmin, getHistoriales);
-router.get('/:id',isAdmin, getHistorial);
-router.put('/:id',isAdmin, updateHistorial);
-
-//usuario
-router.post('/',isUser ,createHistorial);
-router.delete('/:id',isUser, deleteHistorial);
-router.get('/',isUser, getHistoriales);
-router.get('/:id',isUser, getHistorial);
-router.put('/:id',isUser, updateHistorial);
+router.get('/:id', getHistorial);
+router.put('/:id', updateHistorial);
 
 
 export default router;
