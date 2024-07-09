@@ -8,12 +8,19 @@ import { create, edit, deleteComment, getAll, getOne } from "../controllers/comm
 import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 
 const router = Router();
+//admin
+router.post('/',isAdmin ,create);
+router.put('/',isAdmin, edit);
+router.delete('/',isAdmin, deleteComment);
+router.get('/',isAdmin, getAll);
+router.get('/1',isAdmin, getOne);
 
-router.post('/', create);
-router.put('/', edit);
-router.delete('/', deleteComment);
-router.get('/', getAll);
-router.get('/1', getOne);
+//usuario
+router.post('/',isUser ,create);
+router.put('/',isUser, edit);
+router.delete('/',isUser ,deleteComment);
+router.get('/',isUser, getAll);
+router.get('/1',isUser, getOne);
 
 
 export default router;

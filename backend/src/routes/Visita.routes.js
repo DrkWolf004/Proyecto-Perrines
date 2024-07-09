@@ -11,15 +11,17 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 // Obtener todas las visitas de una mascota
-router.get('/', obtenerVisitas);
+router.get('/',isAdmin, obtenerVisitas);
+router.get('/',isUser, obtenerVisitas);
 
 // Crear una nueva visita (solo administradores)
-router.post('/', crearVisita);
+router.post('/',isAdmin ,crearVisita);
 
 // Actualizar una visita existente (solo administradores)
-router.put('/:id', actualizarVisita);
+router.put('/:id',isAdmin, actualizarVisita);
 
-router.delete('/:id', deleteVisita);
-router.get('/:id', getVisita);
+router.delete('/:id',isAdmin ,deleteVisita);
+router.get('/:id',isAdmin, getVisita);
+router.get('/:id',isUser, getVisita);
 
 export default router;

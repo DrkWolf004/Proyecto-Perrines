@@ -13,12 +13,15 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post('/', crearAnuncio);
-router.put('/:id', actualizarAnuncio);
-router.delete('/:id', eliminarAnuncio);
-router.get('/', obternerAnuncios);
-router.post('/comentario', crearComentario);
-router.get('/comentario', obternerComentarios);
+router.post('/',isAdmin ,crearAnuncio);
+router.put('/:id',isAdmin ,actualizarAnuncio);
+router.delete('/:id',isAdmin ,eliminarAnuncio);
+router.get('/',isUser ,obternerAnuncios);
+router.get('/',isAdmin ,obternerAnuncios);
+router.post('/comentario',isUser ,crearComentario);
+router.post('/comentario',isAdmin ,crearComentario);
+router.get('/comentario',isUser ,obternerComentarios);
+router.get('/comentario',isAdmin ,obternerComentarios);
 
 
 export default router;
