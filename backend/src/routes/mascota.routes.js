@@ -12,11 +12,11 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 //Defino las rutas de mascota
-router.post('/', createMascota);
-router.delete('/', DeleteMascota);
+router.post('/',isAdmin ,createMascota);
+router.delete('/',isAdmin ,DeleteMascota);
 router.get('/', GetMascotas);
-router.get('/', GetMascota);
-router.put('/', UpdateMascota);
+router.get('/1', GetMascota);
+router.put('/',isAdmin ,UpdateMascota);
 
 
 export default router;

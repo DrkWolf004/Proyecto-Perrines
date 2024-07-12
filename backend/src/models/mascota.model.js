@@ -31,14 +31,6 @@ const mascotaSchema = new mongoose.Schema(
         salud:{
             type: String,
             required: true
-        },
-        ultima_visita:{
-            type: Date,
-            required: false
-        },
-        ultima_comida:{
-            type: Date,
-            required: false
         }
     }
 );

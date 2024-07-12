@@ -9,6 +9,7 @@ export async function createMascota(req, res) {
 
         const ExisteID = await Mascota.findOne({ eid: MascotaData.id });
 
+
         if (ExisteID) {
             return res.status(400).json({ message: "El ID ya esta registrado." });
         }
@@ -19,9 +20,7 @@ export async function createMascota(req, res) {
             genero:MascotaData.genero,
             raza:MascotaData.raza,
             color:MascotaData.color,
-            salud:MascotaData.salud,
-            ultima_visita:MascotaData.ultima_visita,
-            ultima_comida:MascotaData.ultima_comida
+            salud:MascotaData.salud
         });
 
         await newMascota.save();
@@ -80,7 +79,8 @@ export async function GetMascota(req, res){
             return;
         }
 
-        const mascota = await Mascota.findOne({id: idMascotas });
+        const mascota = await Mascota.findOne({id:idMascotas});
+
 
         if(!mascota){
             res.status(404).json({
@@ -89,6 +89,12 @@ export async function GetMascota(req, res){
             })
             return;
         }
+
+        res.status(200).json({
+            message: "Mascota encontrada",
+            data: mascota
+        });
+        
     }catch(error){
         console.log("Error en mascota.controller.js -> GetMascota():", error);
         res.status(500).json({ message: "Error interno del servidor." });
@@ -107,9 +113,9 @@ export async function GetMascotas(req, res){
         res.status(500).json({ message: "Error interno del servidor." });
     }
 }
-
 export async function UpdateMascota(req, res){
     try{
+
         const idMascota = req.query.id;
         const updatedData = req.body;
 
@@ -120,6 +126,7 @@ export async function UpdateMascota(req, res){
             });
             return;
         }
+
         const MascotaMod = await Mascota.findOneAndUpdate({ id: idMascota }, updatedData, { new: true });
 
         if (!MascotaMod) {
@@ -134,8 +141,12 @@ export async function UpdateMascota(req, res){
             message: "Mascota actualizado correctamente!",
             data: MascotaMod
         });
+
     }catch(error){
         console.log("Error en mascota.controller.js -> UpdateMascota():", error);
         res.status(500).json({ message: "Error interno del servidor." });
     }
 }
+
+
+
