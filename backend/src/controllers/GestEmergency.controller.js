@@ -12,7 +12,7 @@ export async function getEncargados(req, res) {
         if (encargados.length === 0) {
             return res.status(404).json({ message: "Encargado no encontrado" });
         }
-        res.status(200).json({ message:"Lista de encargados", data: encargados});
+        res.status(200).json({ message: "Lista de encargados", data: encargados });
     } catch (error) {
         res.status(500).json({ message: "Error al obtener los encargados", error });
     }
@@ -20,16 +20,14 @@ export async function getEncargados(req, res) {
 
 // Crear un nuevo encargado
 export async function createEncargado(req, res) {
-
     const EncargadoData = req.body; 
 
     try {
         const newEncargado = new Encargado({ 
-            nombre:EncargadoData.nombre, 
-            correo:EncargadoData.correo, 
-            telefono:EncargadoData.telefono, 
-            disponibilidad:EncargadoData.disponibilidad
-            
+            nombre: EncargadoData.nombre, 
+            correo: EncargadoData.correo, 
+            telefono: EncargadoData.telefono, 
+            disponibilidad: EncargadoData.disponibilidad
         }); 
 
         await newEncargado.save(); 
@@ -39,9 +37,8 @@ export async function createEncargado(req, res) {
             data: newEncargado
         });
     } catch (error) { 
-        console.log("Error en GestEmergency.controller.js -> createEncargado():", error),
+        console.log("Error en GestEmergency.controller.js -> createEncargado():", error);
         res.status(500).json({ message: "Error interno del servidor." }); 
-        
     }
 }
 
@@ -57,7 +54,7 @@ export async function updateEncargado(req, res) {
             return res.status(404).json({ message: "Encargado no encontrado" });
         }
 
-        res.status(200).json(updatedEncargado);
+        res.status(200).json({ message: "Encargado actualizado exitosamente", data: updatedEncargado });
 
     } catch (error) { 
         res.status(500).json({ message: "Error al actualizar el encargado", error });
@@ -93,7 +90,7 @@ export async function getVeterinarias(req, res) {
             return res.status(404).json({ message: "Veterinaria no encontrada" });
         }
 
-        res.status(200).json(veterinarias);
+        res.status(200).json({ message: "Lista de veterinarias", data: veterinarias });
 
     } catch (error) {
         res.status(500).json({ message: "Error al obtener las veterinarias", error });
@@ -106,12 +103,11 @@ export async function createVeterinaria(req, res) {
 
     try {
         const newVeterinaria = new Veterinaria({ 
-
-            nombre:VeterinariaData.nombre, 
-            telefono:VeterinariaData.telefono, 
-            direccion:VeterinariaData.direccion, 
-            horarioinicio:VeterinariaData.horarioinicio, 
-            horariofin:VeterinariaData.horariofin 
+            nombre: VeterinariaData.nombre, 
+            telefono: VeterinariaData.telefono, 
+            direccion: VeterinariaData.direccion, 
+            horarioinicio: VeterinariaData.horarioinicio, 
+            horariofin: VeterinariaData.horariofin 
         });
         
         await newVeterinaria.save();
@@ -140,10 +136,10 @@ export async function updateVeterinaria(req, res) {
         }
 
         // Verificar y actualizar la disponibilidad basada en el horario
-        updatedVeterinaria.disponibilidad = verificarDisponibilidad(updatedVeterinaria.horario);
+        updatedVeterinaria.disponibilidad = verificarDisponibilidad(updatedVeterinaria.horarioinicio, updatedVeterinaria.horariofin);
         await updatedVeterinaria.save();
 
-        res.status(200).json(updatedVeterinaria);
+        res.status(200).json({ message: "Veterinaria actualizada exitosamente", data: updatedVeterinaria });
     } catch (error) {
         res.status(500).json({ message: "Error al actualizar la veterinaria", error });
     }
@@ -168,24 +164,25 @@ export async function deleteVeterinaria(req, res) {
 }
 
 // Función para verificar la disponibilidad basada en el horario actual
-function verificarDisponibilidad(horario) {
-    if (!horario || !horario.inicio || !horario.fin) { 
+function verificarDisponibilidad(horarioInicio, horarioFin) {
+    if (!horarioInicio || !horarioFin) { 
         return false; 
     }
 
-    // obtenemos la hora y minutos actuales
     const ahora = new Date(); 
     const horaActual = ahora.getHours(); 
     const minutoActual = ahora.getMinutes(); 
 
-    
-    const inicio = parseInt(horario.inicio.split(':')[0]);
+    const [inicioHora, inicioMinuto] = horarioInicio.split(':').map(Number);
+    const [finHora, finMinuto] = horarioFin.split(':').map(Number);
 
-    if (horaActual > inicio && horaActual < fin) {
-        return true;
-    } else if (horaActual === inicio && minutoActual >= parseInt(horario.inicio.split(':')[1])) { 
-        return true;
-    } else if (horaActual === fin && minutoActual <= parseInt(horario.fin.split(':')[1])) { 
+    const inicio = new Date();
+    inicio.setHours(inicioHora, inicioMinuto, 0);
+
+    const fin = new Date();
+    fin.setHours(finHora, finMinuto, 0);
+
+    if (ahora >= inicio && ahora <= fin) {
         return true;
     }
 
