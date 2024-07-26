@@ -2,7 +2,8 @@
 
 import mongoose from "mongoose";
 
-const esquema = new esquema({
+const commentSchema = new mongoose.Schema({
+
     id: {
         type: Number,
         required: true,
@@ -26,4 +27,6 @@ const esquema = new esquema({
 
 });
 
-export default mongoose.model('Comentario', esquema);
+
+export default mongoose.model('Comment', commentSchema);
+
