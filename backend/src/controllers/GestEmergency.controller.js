@@ -7,17 +7,12 @@ import Veterinaria from '../models/Veterinaria.model.js';
 // Obtener todos los encargados
 export async function getEncargados(req, res) {
     try {
-<<<<<<< HEAD
         const encargados = await Encargado.find(); 
 
         if (encargados.length === 0) {
             return res.status(404).json({ message: "Encargado no encontrado" });
         }
         res.status(200).json({ message: "Lista de encargados", data: encargados });
-=======
-        const encargados = await Encargado.find();
-        res.status(200).json({ message:"Lista de encargados", data: encargados});
->>>>>>> e817585ec254159b280b227ea7d622a8beeeca4b
     } catch (error) {
         res.status(500).json({ message: "Error al obtener los encargados", error });
     }
@@ -25,7 +20,6 @@ export async function getEncargados(req, res) {
 
 // Crear un nuevo encargado
 export async function createEncargado(req, res) {
-<<<<<<< HEAD
     const EncargadoData = req.body; 
 
     try {
@@ -45,32 +39,6 @@ export async function createEncargado(req, res) {
     } catch (error) { 
         console.log("Error en GestEmergency.controller.js -> createEncargado():", error);
         res.status(500).json({ message: "Error interno del servidor." }); 
-=======
-
-    const EncargadoData = req.body;
-
-    try {
-        const newEncargado = new Encargado({ 
-
-            nombre:EncargadoData.nombre, 
-            correo:EncargadoData.correo, 
-            telefono:EncargadoData.telefono, 
-            disponibilidad:EncargadoData.disponibilidad
-            
-        });
-        
-        await newEncargado.save();
-
-        res.status(201).json({ 
-            message: "Encargado registrado exitosamente",
-            data: newEncargado
-        });
-    } catch (error) {
-        
-        console.log("Error en GestEmergency.controller.js -> createEncargado():", error),
-        res.status(500).json({ message: "Error interno del servidor." }); 
-        
->>>>>>> e817585ec254159b280b227ea7d622a8beeeca4b
     }
 }
 
@@ -135,20 +103,11 @@ export async function createVeterinaria(req, res) {
 
     try {
         const newVeterinaria = new Veterinaria({ 
-<<<<<<< HEAD
             nombre: VeterinariaData.nombre, 
             telefono: VeterinariaData.telefono, 
             direccion: VeterinariaData.direccion, 
             horarioinicio: VeterinariaData.horarioinicio, 
             horariofin: VeterinariaData.horariofin 
-=======
-
-            nombre:VeterinariaData.nombre, 
-            telefono:VeterinariaData.telefono, 
-            direccion:VeterinariaData.direccion, 
-            horarioinicio:VeterinariaData.horarioinicio, 
-            horariofin:VeterinariaData.horariofin 
->>>>>>> e817585ec254159b280b227ea7d622a8beeeca4b
         });
         
         await newVeterinaria.save();
