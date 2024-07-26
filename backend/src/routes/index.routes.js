@@ -49,7 +49,6 @@ router.use("/comment", commentroutes);
 
 // Define las rutas de gestión de emergencia /api/gest-emergency
 router.use("/gest-emergency", gestEmergencyRoutes);
-
 // Define las rutas de visitas /api/visita
 router.use("/visita", VisitasRoutes);
 
