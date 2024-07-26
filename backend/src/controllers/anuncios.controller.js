@@ -126,3 +126,26 @@ export async function eliminarAnuncio(req, res){
         res.status(500).json({ message: "Error interno del servidor" });
     }
 }
+
+// eliminar un comentario por id
+
+export async function eliminarComentario(req, res){
+    try {
+        const { id } = req.params;
+        const comentario = await Completar.findByIdAndDelete(id);
+        if (!comentario) {
+            return res.status(404).json({
+                message: "No se encontró el comentario con el id " + id,
+            });
+        }
+        res.status(200).json({
+            message: "Comentario eliminado",
+            data: comentario,
+        });
+    } catch (error) {
+        console.log("Error en anuncios.controller.js -> eliminarComentario()", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+
+
+}
