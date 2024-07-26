@@ -12,10 +12,13 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 //Defino las rutas de Historial comida
-router.post('/', createHistorial);
+
+//admin
+router.post('/',createHistorial);
 router.delete('/:id', deleteHistorial);
-router.get('/', getHistoriales);
+router.get('/',isAdmin, getHistoriales);
 router.get('/:id', getHistorial);
 router.put('/:id', updateHistorial);
+
 
 export default router;

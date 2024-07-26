@@ -12,34 +12,52 @@ import authRoutes from "./auth.routes.js";
 import MascotaRoutes from "./mascota.routes.js";
 
 /** Enrutador de HistorialComida */
-import HistorialRoutes from "./HistorialComida.routes.js"
+import HistorialRoutes from "./HistorialComida.routes.js";
 
 /** Enrutador de comentarios */
 import commentroutes from "./comment.routes.js";
 
-/** Enrutador de Visitas */
+/** Enrutador de gestión de emergencia */
+import gestEmergencyRoutes from "./GestEmergency.routes.js";
+
+/** Enrutador de visitas */
 import VisitasRoutes from "./Visita.routes.js";
+
+/** Enrutador de anuncios */
+import AnunciosRoutes from "./anuncios.routes.js";
+
+/** Enrutador de perros */
+import dogRoutes from "./dog.routes.js";
 
 // Se realiza una instancia de express
 const router = Router();
 
-// Define las rutas para los usuarios /api/users
-router.use("/user",  userRoutes);
+// Define las rutas para los usuarios /api/user
+router.use("/user", userRoutes);
+
 // Define las rutas para la autenticación /api/auth
 router.use("/auth", authRoutes);
 
-//Defino las rutas de mascotas /api/mascota
+// Define las rutas de mascotas /api/mascota
 router.use("/mascota", MascotaRoutes);
 
-//Defino las rutas de HistorialComidas /api/comida
+// Define las rutas de HistorialComidas /api/comida
 router.use("/comida", HistorialRoutes);
 
-//Defino las rutas de comentarios /api/comment
+// Define las rutas de comentarios /api/comment
 router.use("/comment", commentroutes);
 
-//Defino las rutas de visitas /api/visita
+// Define las rutas de gestión de emergencia /api/gest-emergency
+router.use("/gest-emergency", gestEmergencyRoutes);
+
+// Define las rutas de visitas /api/visita
 router.use("/visita", VisitasRoutes);
 
-// Exporta el modulo de rutas
+// Define las rutas de anuncios /api/anuncios
+router.use("/anuncios", AnunciosRoutes);
 
+// Define las rutas de perros /api/dog
+router.use("/dog", dogRoutes);
+
+// Exporta el modulo de rutas
 export default router;

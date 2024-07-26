@@ -79,3 +79,69 @@ export async function actualizarVisita(req, res){
 
   }
 };
+
+export async function getVisita(req,res){
+  const { id } = req.params;
+  try{
+
+      if (!id) {
+          res.status(400).json({
+              message: "El parámetro 'id' es requerido.",
+              data: null
+          });
+          return;
+      }
+
+      const visita = await Visita.findById(id).populate('mascotaId');
+
+      if(!visita){
+          res.status(404).json({
+              message: "Visita al veterinario no encontrada",
+              data: null
+          });
+  
+          return;
+      }
+      
+      res.status(200).json({ 
+          message: "Visita al veterinario:",
+          data: visita
+      });
+  
+  }catch(error){
+      console.log("Error en visita.controller.js -> getVisita():", error);
+      res.status(500).json({ message: "Error interno del servidor." });
+  }
+}
+
+export async function deleteVisita(req,res){
+  const { id } = req.params
+  try{    
+      if (!id) {
+          res.status(400).json({
+              message: "El parámetro 'id' es requerido.",
+              data: null
+          });
+          return;
+      }
+
+      const ElimVisita = await Visita.findByIdAndDelete(id);
+
+      if(!ElimVisita){
+          res.status(404).json({
+              message: "Visita al veterinario no encontrada",
+              data: null
+          });
+          return;
+      }
+      
+      res.status(200).json({ 
+          message: "Visita al veterinario eliminada exitosamente",
+          data: ElimVisita
+      });
+
+  }catch(error){
+      console.log("Error en visita.controller.js -> deleteVisita():", error);
+      res.status(500).json({ message: "Error interno del servidor." });
+  }
+}

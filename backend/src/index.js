@@ -17,60 +17,62 @@ import { createRoles, createUsers } from "./config/initSetup.js";
 
 /**
  * Inicia el servidor web
-*/
+ */
 async function setupServer() {
   try {
     /** Instancia de la aplicacion */
     const app = express();
-    app.disable("x-powered-by");
-    
+    app.disable("x-powered-by"); // Deshabilita el encabezado 'X-Powered-By' por razones de seguridad
+
     // Configuración de express-session
-    app.use(session({
-      name: 'miCookie',
-      secret: `${PASS_SECRET}`,
-      resave: false,
-      saveUninitialized: false,
-    }));
+    app.use(
+      session({
+        name: "miCookie", // Nombre de la cookie
+        secret: PASS_SECRET, // Secreto usado para firmar la cookie
+        resave: false, // No guarda la sesión si no hay modificaciones
+        saveUninitialized: false, // No guarda sesiones no inicializadas
+      })
+    );
 
     // Agregamos los cors
-    app.use(cors({ credentials: true, origin: true }));
+    app.use(cors({ credentials: true, origin: true })); // Habilita CORS con las credenciales permitidas
     // Agrega el middleware para el manejo de datos en formato URL
-    app.use(urlencoded({ extended: true }));
+    app.use(urlencoded({ extended: true })); // Permite el análisis de cuerpos codificados en URL
     // Agrega el middleware para el manejo de datos en formato JSON
-    app.use(json());
+    app.use(json()); // Permite el análisis de cuerpos JSON
     // Agregamos morgan para ver las peticiones que se hacen al servidor
-    app.use(morgan("dev"));
+    app.use(morgan("dev")); // Usa morgan en modo desarrollo para registrar solicitudes
     // Agrega el enrutador principal al servidor
-    app.use("/api", indexRoutes);
+    app.use("/api", indexRoutes); // Usa las rutas definidas en indexRoutes para las rutas que comienzan con /api
 
     // Inicia el servidor en el puerto especificado
     app.listen(PORT, () => {
-      console.log(`=> Servidor corriendo en ${HOST}:${PORT}/api`);
+      console.log(`=> Servidor corriendo en ${HOST}:${PORT}/api`); // Muestra un mensaje cuando el servidor está corriendo
     });
   } catch (err) {
-    console.log('Error en server.js -> setupAPI(): ', err);
+    console.log("Error en server.js -> setupServer(): ", err); // Manejo de errores
   }
 }
 
 /**
  * Inicia la API
-*/
+ */
 async function setupAPI() {
   try {
     // Inicia la conexión a la base de datos
-    await connectDB();
+    await connectDB(); // Llama a la función para conectar a la base de datos
     // Inicia el servidor web
-    await setupServer();
+    await setupServer(); // Llama a la función para configurar y empezar el servidor
     // Inicia la creación de los roles
-    await createRoles();
+    await createRoles(); // Llama a la función para crear roles iniciales
     // Inicia la creación del usuario admin y user
-    await createUsers();
+    await createUsers(); // Llama a la función para crear usuarios iniciales
   } catch (err) {
-    console.log('Error en server.js -> setupAPI(): ', err);
+    console.log("Error en server.js -> setupAPI(): ", err); // Manejo de errores
   }
 }
 
 // Inicia la API
 setupAPI()
-  .then(() => console.log("=> API Iniciada exitosamente"))
-  .catch((err) => console.log('Error en server.js -> setupAPI(): ', err));
+  .then(() => console.log("=> API Iniciada exitosamente")) // Muestra un mensaje cuando la API se ha iniciado con éxito
+  .catch((err) => console.log("Error en server.js -> setupAPI(): ", err)); // Manejo de errores en la inicialización de la API

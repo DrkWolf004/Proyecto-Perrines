@@ -3,7 +3,7 @@
 //importar el modulo express
 import { Router } from "express";
 
-import { obtenerVisitas,crearVisita, actualizarVisita } from "../controllers/Visita.controller.js"; 
+import { obtenerVisitas,crearVisita, actualizarVisita, deleteVisita, getVisita } from "../controllers/Visita.controller.js"; 
 
 /** Middlewares de autorizacion */
 import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
@@ -14,9 +14,12 @@ const router = Router();
 router.get('/', obtenerVisitas);
 
 // Crear una nueva visita (solo administradores)
-router.post('/', crearVisita);
+router.post('/',isAdmin ,crearVisita);
 
 // Actualizar una visita existente (solo administradores)
-router.put('/:id', actualizarVisita);
+router.put('/:id',isAdmin, actualizarVisita);
+
+router.delete('/:id',isAdmin ,deleteVisita);
+router.get('/:id', getVisita);
 
 export default router;
