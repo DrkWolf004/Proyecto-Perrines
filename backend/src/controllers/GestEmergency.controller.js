@@ -1,14 +1,18 @@
 // Importaciones de modelos
-import Encargado from '../models/encargado.model.js';
-import Veterinaria from '../models/veterinaria.model.js';
+import Encargado from '../models/Encargado.model.js';
+import Veterinaria from '../models/Veterinaria.model.js';
 
 // Encargado controllers
 
 // Obtener todos los encargados
 export async function getEncargados(req, res) {
     try {
-        const encargados = await Encargado.find();
-        res.status(200).json(encargados);
+        const encargados = await Encargado.find(); 
+
+        if (encargados.length === 0) {
+            return res.status(404).json({ message: "Encargado no encontrado" });
+        }
+        res.status(200).json({ message: "Lista de encargados", data: encargados });
     } catch (error) {
         res.status(500).json({ message: "Error al obtener los encargados", error });
     }
@@ -16,31 +20,43 @@ export async function getEncargados(req, res) {
 
 // Crear un nuevo encargado
 export async function createEncargado(req, res) {
-    const { nombre, correo, telefono } = req.body;
+    const EncargadoData = req.body; 
 
     try {
-        const newEncargado = new Encargado({ nombre, correo, telefono });
-        await newEncargado.save();
-        res.status(201).json(newEncargado);
-    } catch (error) {
-        res.status(500).json({ message: "Error al crear el encargado", error });
+        const newEncargado = new Encargado({ 
+            nombre: EncargadoData.nombre, 
+            correo: EncargadoData.correo, 
+            telefono: EncargadoData.telefono, 
+            disponibilidad: EncargadoData.disponibilidad
+        }); 
+
+        await newEncargado.save(); 
+
+        res.status(201).json({ 
+            message: "Encargado creado exitosamente",
+            data: newEncargado
+        });
+    } catch (error) { 
+        console.log("Error en GestEmergency.controller.js -> createEncargado():", error);
+        res.status(500).json({ message: "Error interno del servidor." }); 
     }
 }
 
 // Actualizar un encargado por su ID
 export async function updateEncargado(req, res) {
-    const { id } = req.params;
+    const { id } = req.params; 
     const updatedData = req.body;
 
-    try {
+    try { 
         const updatedEncargado = await Encargado.findByIdAndUpdate(id, updatedData, { new: true });
 
         if (!updatedEncargado) {
             return res.status(404).json({ message: "Encargado no encontrado" });
         }
 
-        res.status(200).json(updatedEncargado);
-    } catch (error) {
+        res.status(200).json({ message: "Encargado actualizado exitosamente", data: updatedEncargado });
+
+    } catch (error) { 
         res.status(500).json({ message: "Error al actualizar el encargado", error });
     }
 }
@@ -52,12 +68,13 @@ export async function deleteEncargado(req, res) {
     try {
         const deletedEncargado = await Encargado.findByIdAndDelete(id);
 
-        if (!deletedEncargado) {
+        if (!deletedEncargado) { 
             return res.status(404).json({ message: "Encargado no encontrado" });
         }
 
         res.status(200).json({ message: "Encargado eliminado correctamente" });
-    } catch (error) {
+
+    } catch (error) { 
         res.status(500).json({ message: "Error al eliminar el encargado", error });
     }
 }
@@ -68,7 +85,13 @@ export async function deleteEncargado(req, res) {
 export async function getVeterinarias(req, res) {
     try {
         const veterinarias = await Veterinaria.find();
-        res.status(200).json(veterinarias);
+
+        if (veterinarias.length === 0) {
+            return res.status(404).json({ message: "Veterinaria no encontrada" });
+        }
+
+        res.status(200).json({ message: "Lista de veterinarias", data: veterinarias });
+
     } catch (error) {
         res.status(500).json({ message: "Error al obtener las veterinarias", error });
     }
@@ -76,15 +99,27 @@ export async function getVeterinarias(req, res) {
 
 // Crear una nueva veterinaria
 export async function createVeterinaria(req, res) {
-    const { nombre, telefono, direccion, horario } = req.body;
+    const VeterinariaData = req.body;
 
     try {
-        const newVeterinaria = new Veterinaria({ nombre, telefono, direccion, horario });
-        newVeterinaria.disponibilidad = verificarDisponibilidad(horario); // Verificar disponibilidad al crear
+        const newVeterinaria = new Veterinaria({ 
+            nombre: VeterinariaData.nombre, 
+            telefono: VeterinariaData.telefono, 
+            direccion: VeterinariaData.direccion, 
+            horarioinicio: VeterinariaData.horarioinicio, 
+            horariofin: VeterinariaData.horariofin 
+        });
+        
         await newVeterinaria.save();
-        res.status(201).json(newVeterinaria);
+
+        res.status(201).json({ 
+            message: "Veterinaria registrada exitosamente",
+            data: newVeterinaria
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error al crear la veterinaria", error });
+        console.log("Error en GestEmergency.controller.js -> createVeterinaria():", error);
+        res.status(500).json({ message: "Error interno del servidor." });
     }
 }
 
@@ -101,10 +136,10 @@ export async function updateVeterinaria(req, res) {
         }
 
         // Verificar y actualizar la disponibilidad basada en el horario
-        updatedVeterinaria.disponibilidad = verificarDisponibilidad(updatedVeterinaria.horario);
+        updatedVeterinaria.disponibilidad = verificarDisponibilidad(updatedVeterinaria.horarioinicio, updatedVeterinaria.horariofin);
         await updatedVeterinaria.save();
 
-        res.status(200).json(updatedVeterinaria);
+        res.status(200).json({ message: "Veterinaria actualizada exitosamente", data: updatedVeterinaria });
     } catch (error) {
         res.status(500).json({ message: "Error al actualizar la veterinaria", error });
     }
@@ -122,29 +157,32 @@ export async function deleteVeterinaria(req, res) {
         }
 
         res.status(200).json({ message: "Veterinaria eliminada correctamente" });
+
     } catch (error) {
         res.status(500).json({ message: "Error al eliminar la veterinaria", error });
     }
 }
 
 // Función para verificar la disponibilidad basada en el horario actual
-function verificarDisponibilidad(horario) {
-    if (!horario || !horario.inicio || !horario.fin) {
-        return false;
+function verificarDisponibilidad(horarioInicio, horarioFin) {
+    if (!horarioInicio || !horarioFin) { 
+        return false; 
     }
 
-    const ahora = new Date();
-    const horaActual = ahora.getHours();
-    const minutoActual = ahora.getMinutes();
+    const ahora = new Date(); 
+    const horaActual = ahora.getHours(); 
+    const minutoActual = ahora.getMinutes(); 
 
-    const inicio = parseInt(horario.inicio.split(':')[0]);
-    const fin = parseInt(horario.fin.split(':')[0]);
+    const [inicioHora, inicioMinuto] = horarioInicio.split(':').map(Number);
+    const [finHora, finMinuto] = horarioFin.split(':').map(Number);
 
-    if (horaActual > inicio && horaActual < fin) {
-        return true;
-    } else if (horaActual === inicio && minutoActual >= parseInt(horario.inicio.split(':')[1])) {
-        return true;
-    } else if (horaActual === fin && minutoActual <= parseInt(horario.fin.split(':')[1])) {
+    const inicio = new Date();
+    inicio.setHours(inicioHora, inicioMinuto, 0);
+
+    const fin = new Date();
+    fin.setHours(finHora, finMinuto, 0);
+
+    if (ahora >= inicio && ahora <= fin) {
         return true;
     }
 
