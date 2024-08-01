@@ -1,13 +1,13 @@
 import deleteIcon from "../assets/deleteIcon.svg"; // Importa el icono de eliminación
 import updateIcon from "../assets/updateIcon.svg"; // Importa el icono de actualización
 
-// Componente de tabla genérico que acepta columnas, datos y funciones de eliminación y edición como props
-const Table = ({ columns, data, onDelete, onEdit }) => {
+// Componente de tabla que acepta columnas, datos y funciones de eliminación y edición como props
+const AnuncioTable = ({ columns, data, onDelete, onEdit }) => {
   const totalRows = 7; // Define el número total de filas para mostrar
   const numEmptyRows = totalRows - (data.length > 0 ? data.length : 1); // Calcula el número de filas vacías para llenar la tabla
 
   return (
-    <table id="users" className="styled-table">
+    <table id="anuncio" className="styled-table">
       <thead>
         <tr>
           {columns.map((col) => (
@@ -41,7 +41,7 @@ const Table = ({ columns, data, onDelete, onEdit }) => {
                           width: "24px",
                           height: "24px",
                         }}
-                        onClick={() => onEdit(row._id || row.Rut || row.id)} // Llama a la función de edición cuando se hace clic en el icono de edición
+                        onClick={() => onEdit(row.id)} // Llama a la función de edición cuando se hace clic en el icono de edición
                       />
                       <img
                         src={deleteIcon}
@@ -51,8 +51,7 @@ const Table = ({ columns, data, onDelete, onEdit }) => {
                           width: "24px",
                           height: "24px",
                         }}
-
-                        onClick={() => onDelete(row._id ||row.Rut || row.id)} 
+                        onClick={() => onDelete(row.id)} // Llama a la función de eliminación cuando se hace clic en el icono de eliminación
                       />
                     </>
                   ) : (
@@ -76,4 +75,4 @@ const Table = ({ columns, data, onDelete, onEdit }) => {
   );
 };
 
-export default Table;
+export default AnuncioTable;

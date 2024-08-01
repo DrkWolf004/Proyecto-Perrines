@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom"; // Navegación comentada ya que no se usa en este ejemplo
 import Navbar from "../components/Navbar";
-import DogTable from "../components/DogTable";
+import Table from "../components/Table";
 import { getDogs, createDog, deleteDog } from "../services/dog.service";
 import searchIcon from "../assets/searchIcon.svg";
+import { useNavigate } from 'react-router-dom';
 
 const Dogs = () => {
   // Estados para manejar los datos de los perros, y los valores de los campos del formulario y búsqueda
@@ -34,14 +35,20 @@ const Dogs = () => {
   };
 
   // Función para eliminar un perro
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id) => {
     try {
-      await deleteDog(id); // Llama al servicio para eliminar el perro
-      setDogs(dogs.filter((dog) => dog.id !== id)); // Filtra la lista de perros para remover el eliminado
+      await deleteDog(_id);
+      setDogs(dogs.filter((Doggy) => Doggy.id !== _id));
     } catch (error) {
-      console.error("Error: ", error); // Manejo de errores
+      console.error("Error deleting Dog:", error);
     }
   };
+
+  const navigate = useNavigate();
+  const handleEdit = async (id) => {
+    const editADog = dogs.find(r => r._id === id);
+    navigate(`/editDogs/${id}`, { state: { editADog } });
+  }
 
   // Función para registrar un nuevo perro
   const handleRegister = async () => {
@@ -77,7 +84,7 @@ const Dogs = () => {
     <>
       <Navbar /> {/* Componente de navegación */}
       <div className="main-container">
-        <div className="form-container">
+        <div className="form2-container">
           <h1>Registrar Perro</h1>
           {/* Campos del formulario para registrar un nuevo perro */}
           <input
@@ -115,10 +122,11 @@ const Dogs = () => {
             </div>
           </div>
           {/* Componente de tabla para mostrar la lista de perros */}
-          <DogTable
+          <Table
             columns={columns}
             data={filteredDogs}
             onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         </div>
       </div>

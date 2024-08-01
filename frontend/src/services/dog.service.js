@@ -58,7 +58,7 @@ export async function updateDog(data, id) {
  */
 export async function deleteDog(id) {
   try {
-    const response = await axios.delete(`/dog/${id}`); // Realiza una solicitud DELETE a la ruta /dog/{id}
+    const response = await axios.delete(`/dog/delete/${id}`); // Realiza una solicitud DELETE a la ruta /dog/{id}
     return response.data; // Retorna los datos del perro eliminado
   } catch (error) {
     throw error.response?.data || error.message; // Lanza un error con el mensaje de error de la respuesta o el mensaje de error general

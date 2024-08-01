@@ -8,6 +8,10 @@ import EditUser from "./pages/EditUser";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Users from "./pages/Users";
 import Dogs from "./pages/Dogs";
+import Anuncios from "./pages/anuncio";
+import EditarAnuncio from "./pages/editAnuncio";
+import EditarDog from "./pages/editDog";
+import Veterinarias from "./pages/Veterinarias";
 
 const AppRouter = () => {
   return (
@@ -37,6 +41,38 @@ const AppRouter = () => {
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
             <Dogs />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editDogs/:id"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <EditarDog/>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/anuncios"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <Anuncios />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editA/:id"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <EditarAnuncio />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/veterinarias"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <Veterinarias />
           </ProtectedRoute>
         }
       />

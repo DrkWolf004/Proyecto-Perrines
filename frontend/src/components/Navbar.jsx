@@ -41,6 +41,15 @@ const Navbar = () => {
               <NavLink to="/dogs">Perros</NavLink>{" "}
               {/* Enlace a la página de perros */}
             </li>
+            <li className={location.pathname === "/anuncios" ? "active" : ""}>
+              <NavLink to="/anuncios">Anuncios</NavLink>{" "}
+              {/* Enlace a la página de Anuncios */}
+            </li>
+            <li className={location.pathname === "/veterinarias" ? "active" : ""}>
+              <NavLink to="/veterinarias">Veterinarias</NavLink>{" "}
+              {/* Enlace a la página de Veterinarias */}
+            </li>
+            
           </>
         )}
         <li className={location.pathname === "/perfil" ? "active" : ""}>
