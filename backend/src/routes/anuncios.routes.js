@@ -15,7 +15,7 @@ const router = Router();
 
 router.post('/',isAdmin ,crearAnuncio);
 router.put('/:id',isAdmin ,actualizarAnuncio);
-router.delete('/:id',isAdmin ,eliminarAnuncio);
+router.delete('/delete/:id',isAdmin ,eliminarAnuncio);
 router.get('/',obternerAnuncios);
 router.post('/comentario',crearComentario);
 router.get('/comentario',obternerComentarios);

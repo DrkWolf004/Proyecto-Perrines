@@ -16,11 +16,11 @@ const veterinariaSchema = new mongoose.Schema({
     },
  
     horarioinicio: {
-        type: String,
+        type: Date,
         required: true
     },
     horariofin: {
-        type: String,
+        type: Date,
         required: true
     }
 });
