@@ -48,7 +48,7 @@ const AppRouter = () => {
         path="/editDogs/:id"
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
-            <EditarDog/>
+            <EditarDog />
           </ProtectedRoute>
         }
       />

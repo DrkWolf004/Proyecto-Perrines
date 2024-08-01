@@ -44,12 +44,6 @@ const Dogs = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const handleEdit = async (id) => {
-    const editADog = dogs.find(r => r._id === id);
-    navigate(`/editDogs/${id}`, { state: { editADog } });
-  }
-
   // Función para registrar un nuevo perro
   const handleRegister = async () => {
     try {
@@ -64,6 +58,13 @@ const Dogs = () => {
       console.error("Error: ", error); // Manejo de errores
     }
   };
+
+  //Funcion editar un perro
+  const navigate = useNavigate();
+  const handleEdit = async (id2) => {
+    const editDog = dogs.find(r => r.id === id2);
+    navigate(`/editDogs/${id2}`, { state: { editDog } });
+  }
 
   // Función para manejar el término de búsqueda
   const handleSearch = (e) => {
