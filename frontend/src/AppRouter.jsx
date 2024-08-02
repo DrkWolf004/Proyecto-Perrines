@@ -15,6 +15,7 @@ import Veterinarias from "./pages/Veterinarias";
 import EditarVeterinary from "./pages/editVeterinaria";
 import UserComments from "./pages/UserComment"; 
 import Comments from "./pages/comments";
+import Useranuncios from "./pages/anunciosUser";
 
 const AppRouter = () => {
   return (
@@ -68,6 +69,14 @@ const AppRouter = () => {
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
             <Anuncios />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Useranuncios"
+        element={
+          <ProtectedRoute>
+            <Useranuncios />
           </ProtectedRoute>
         }
       />
