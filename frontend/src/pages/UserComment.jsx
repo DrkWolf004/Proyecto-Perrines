@@ -40,7 +40,6 @@ const UserComments = () => {
       const newcomment = { tittle, descripcion, date}; // Crea un nuevo objeto anuncio con los datos del formulario
       await createComments(newcomment); // Llama al servicio para crear el nuevo anuncio
       dataAnuncio(); // Refresca la lista de anuncios después de registrar uno nuevo
-      // Limpiar campos del formulario
       settittle("");
       setdescripcion("");
       setdate("");
@@ -88,7 +87,7 @@ return (
             <img src={searchIcon} alt="Buscar" className="search-icon" />
             <input
               type="text"
-              placeholder="Buscar Anuncio por Titulo"
+              placeholder="Buscar comentario"
               value={searchTerm}
               onChange={handleSearch}
               className="search-input"

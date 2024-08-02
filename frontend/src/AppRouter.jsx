@@ -14,6 +14,7 @@ import EditarDog from "./pages/editDog";
 import Veterinarias from "./pages/Veterinarias";
 import EditarVeterinary from "./pages/editVeterinaria";
 import UserComments from "./pages/UserComment"; 
+import Comments from "./pages/comments";
 
 const AppRouter = () => {
   return (
@@ -58,7 +59,7 @@ const AppRouter = () => {
         path="/comment"
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
-            <UserComments />
+            <Comments />
           </ProtectedRoute>
         }
       />
@@ -91,6 +92,14 @@ const AppRouter = () => {
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
             <EditarVeterinary />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Usercomment"
+        element={
+          <ProtectedRoute>
+            <UserComments />
           </ProtectedRoute>
         }
       />
