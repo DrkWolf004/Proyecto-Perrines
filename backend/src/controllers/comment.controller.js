@@ -7,34 +7,26 @@ import Comment from "../models/comment.model.js";
 
 //  Funciones
 
-export async function create(req,res){
+export async function create(req, res) { 
     try {
-        const Commentdata = req.body;
-        
-        const ExisteID = await Comment.findOne({ eid: Commentdata.id });
+    const CommentData = req.body;
 
-        if (ExisteID) {
-            return res.status(400).json({ message: "El ID ya esta registrado." });
-        }
+    const nuevoComment = new Comment({
+        tittle: CommentData.tittle,
+        descripcion: CommentData.descripcion,
+        date: CommentData.date
+    });
+    
+    await nuevoComment.save();
 
-        const newcomment = new Comment({
-            tittle: Commentdata.tittle,
-            descripcion: Commentdata.descripcion,
-            date: Commentdata.date,
-        });
-
-        await newcomment.save();
-
-        res.status(201).json({
-            message: "Comentario creado",
-            data: newcomment
-        });
-
-    }catch(error){
-        console.log("Error en comment.controller.js -> create(): ", error);
-        res.status(500).json({ message: error.message });
+    res.status(201).json({
+        message: "El anuncio se ha guardado correctamente",
+        data: nuevoComment,
+    });
+}catch (error) { 
+    console.log("Error en anuncios.controller.js -> crearAnuncio()", error);
+        res.status(500).json({ message: "Error interno del servidor" });
     }
-
 }
 
 export async function deleteComment(req, res){
@@ -113,4 +105,3 @@ export async function edit(req,res){
         res.status(500).json({ message: error.message });
     }
 }
-

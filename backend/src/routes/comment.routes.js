@@ -5,8 +5,6 @@ import { Router } from "express";
 
 import { create, edit, deleteComment, getAll, getOne } from "../controllers/comment.controller.js";
 
-import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
-
 const router = Router();
 //admin
 router.post('/',create);
