@@ -18,7 +18,6 @@ export async function create(req,res){
         }
 
         const newcomment = new Comment({
-            id: Commentdata.id,
             tittle: Commentdata.tittle,
             descripcion: Commentdata.descripcion,
             date: Commentdata.date,
@@ -40,17 +39,10 @@ export async function create(req,res){
 
 export async function deleteComment(req, res){
     try{
-        const idcomment = req.query.id;
+        const { idcomment } = req.params
 
-        if (!idcomment) {
-            res.status(400).json({
-                message: "El parámetro 'id' es requerido.",
-                data: null
-            });
-            return;
-        }
 
-        const comment = await Comment.findOneAndDelete({ id: idcomment });
+        const comment = await Comment.findOneAndDelete( idcomment );
 
         if (!comment) {
             return res.status(404).json({
@@ -84,8 +76,8 @@ export async function getAll(req,res){
 
 export async function getOne(req,res){
     try {
-        const id = req.query.id;
-        const comment = await Comment.findOne({ id: id });
+        const { id } = req.params
+        const comment = await Comment.findOne(id );
         
         if(!comment){
             res.status(404).json({
@@ -108,12 +100,9 @@ export async function getOne(req,res){
 
 export async function edit(req,res){
     try {
-        const id = req.query.id;
+        const { id } = req.params
         const updatedData = req.body;
-        const comment = await Comment.findOneAndUpdate
-        ({
-            id: id
-        }, updatedData, {new: true});
+        const comment = await Comment.findOneAndUpdate( id , updatedData, {new: true});
         res.status(200).json({
             message: "Comentario actualizado",
             data: comment

@@ -10,10 +10,10 @@ import { isAdmin, isUser } from "../middlewares/auth.middleware.js";
 const router = Router();
 //admin
 router.post('/',create);
-router.put('/', edit);
-router.delete('/', deleteComment);
+router.put('/:id', edit);
+router.delete('/delete/:id', deleteComment);
 router.get('/', getAll);
-router.get('/1', getOne);
+router.get('/:id', getOne);
 
 
 
