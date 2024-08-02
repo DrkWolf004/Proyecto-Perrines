@@ -52,6 +52,10 @@ const Navbar = () => {
             
           </>
         )}
+        <li className={location.pathname === "/comment" ? "active" : ""}>
+              <NavLink to="/comment">Comentarios</NavLink>{" "}
+              {/* Enlace a la página de COmentarios */}
+            </li>
         <li className={location.pathname === "/perfil" ? "active" : ""}>
           <NavLink to="/profile">Perfil</NavLink>{" "}
           {/* Enlace a la página de perfil */}

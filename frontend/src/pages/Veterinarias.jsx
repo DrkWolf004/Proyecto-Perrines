@@ -25,6 +25,7 @@ const Veterinarias = () => {
         direccion: veterinaria.direccion,
         horarioinicio: veterinaria.horarioinicio,
         horariofin: veterinaria.horariofin,
+        _id: veterinaria._id
       }));
       setVeterinarias(formattedData);
       console.log(formattedData);
@@ -49,16 +50,16 @@ const Veterinarias = () => {
   const navigate = useNavigate();
   const handleEdit = async (id) => {
     const editVeterinaria = veterinarias.find(r => r._id === id);
-    navigate(`/editA/${id}`, { state: { editVeterinaria } });
+    navigate(`/EditarVeterinaria/${id}`, { state: { editVeterinaria } });
   }
 
 
-  // Función para registrar un nuevo anuncio
+  // Función para registrar una nueva veterinaria
   const handleRegister = async () => {
     try {
       const newAnuncio = { nombre, telefono,direccion, horarioinicio, horariofin}; // Crea un nuevo objeto anuncio con los datos del formulario
-      await createVeterinarias(newAnuncio); // Llama al servicio para crear el nuevo anuncio
-      dataVeterinaria(); // Refresca la lista de anuncios después de registrar uno nuevo
+      await createVeterinarias(newAnuncio); // Llama al servicio para crear la nueva veterinaria
+      dataVeterinaria(); // Refresca la lista de veterinarias después de registrar uno nuevo
       // Limpiar campos del formulario
       setNombre("");
       setTelefono("");
@@ -80,8 +81,8 @@ return (
     <Navbar /> {/* Componente de navegación */}
     <div className="main-container">
       <div className="form2-container">
-        <h1>Crear Anuncio</h1>
-        {/* Campos del formulario para registrar un nuevo anuncio */}
+        <h1>Crear Veterinaria</h1>
+        {/* Campos del formulario para registrar una nueva veterinaria*/}
         <input
           type="text"
           placeholder="nombre"

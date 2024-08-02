@@ -12,6 +12,8 @@ import Anuncios from "./pages/anuncio";
 import EditarAnuncio from "./pages/editAnuncio";
 import EditarDog from "./pages/editDog";
 import Veterinarias from "./pages/Veterinarias";
+import EditarVeterinary from "./pages/editVeterinaria";
+import UserComments from "./pages/UserComment"; 
 
 const AppRouter = () => {
   return (
@@ -53,6 +55,14 @@ const AppRouter = () => {
         }
       />
       <Route
+        path="/comment"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <UserComments />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/anuncios"
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
@@ -73,6 +83,14 @@ const AppRouter = () => {
         element={
           <ProtectedRoute allowedRoles={["administrador"]}>
             <Veterinarias />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/EditarVeterinaria/:id"
+        element={
+          <ProtectedRoute allowedRoles={["administrador"]}>
+            <EditarVeterinary />
           </ProtectedRoute>
         }
       />
